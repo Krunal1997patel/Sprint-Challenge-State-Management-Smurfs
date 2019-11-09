@@ -5,7 +5,10 @@ import {
     START_FETCHING,
     POSTING_DATA,
     POSTING_DATA_SUCCESS,
-    POSTING_DATA_FAILURE
+    POSTING_DATA_FAILURE,
+    DELETING_DATA,
+    DELETING_DATA_SUCCESS,
+    DELETING_DATA_FAILURE
 
 } from '../action'
 
@@ -40,6 +43,15 @@ const reducer = (state = initialState, action) =>{
 
         case POSTING_DATA_FAILURE:
             return { ...state, error: action.payload, isFeatching: false }
+
+        case DELETING_DATA:
+            return{ ...state, isFeatching: true }
+
+        case DELETING_DATA_SUCCESS:
+            return { ...state, smurfs: action.payload, isFeatching: false }
+
+        case DELETING_DATA_FAILURE:
+            return { ...state, error: action.payload }
 
         default: 
         return state

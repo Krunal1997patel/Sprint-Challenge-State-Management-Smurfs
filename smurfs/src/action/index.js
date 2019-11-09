@@ -8,6 +8,11 @@ export const POSTING_DATA = 'POSTING_DATA';
 export const POSTING_DATA_SUCCESS = 'POSTING_DATA_SUCCESS';
 export const POSTING_DATA_FAILURE = 'POSTING_DATA_FAILURE';
 
+export const DELETING_DATA = 'DELETING_DATA';
+export const DELETING_DATA_SUCCESS = 'DELETING_DATA_SUCCESS';
+export const DELETING_DATA_FAILURE = 'DELETING_DATA_FAILURE';
+
+
 
 export const fetchSmurf = () => dispatch => {
     dispatch( {  type: START_FETCHING  } );
@@ -25,4 +30,13 @@ export const postSmurf = smurfInfo => dispatch => {
     .post('http://localhost:3333/smurfs', smurfInfo)
     .then( response => dispatch( { type: POSTING_DATA_SUCCESS, payload: response.data } ))
     .catch( err => dispatch( { type: POSTING_DATA_FAILURE, payload: err.response } ))
+}
+
+export const deleteSmurf = smurfID => dispatch => {
+    dispatch( {  type:  DELETING_DATA } );
+
+    axios
+    .delete(`http://localhost:3333/smurfs/${smurfID}`)
+    .then( response => dispatch( { type: DELETING_DATA_SUCCESS, payload: response.data } ))
+    .catch( err => dispatch( { type: DELETING_DATA_FAILURE, payload: err.response } ))
 }
